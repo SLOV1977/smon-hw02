@@ -49,7 +49,7 @@ systemctl enable zabbix-server apache2
 
 ![Web-интерфейс Zabbix](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-01.png)
 
-![Web-интерфейс Zabbix](smon-hw-02-01.png)
+![Web-интерфейс Zabbix](img/smon-hw-02-01.png)
 
 ---
 
@@ -88,31 +88,31 @@ systemctl enable zabbix-agent
 
 ![Раздел "Configuration > Hosts"](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-02.png)
 
-![Раздел "Configuration > Hosts"](smon-hw-02-02.png)
+![Раздел "Configuration > Hosts"](img/smon-hw-02-02.png)
 
 
 ![Лог zabbix agent на slov-VirtualBox](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-04.png)
 
-![Лог zabbix agent на slov-VirtualBox](smon-hw-02-04.png)
+![Лог zabbix agent на slov-VirtualBox](img/smon-hw-02-04.png)
 
 
 ![Лог zabbix agent на DESKTOP-PVKD5GR](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-03.png)
 
-![Лог zabbix agent на DESKTOP-PVKD5GR](smon-hw-02-03.png)
+![Лог zabbix agent на DESKTOP-PVKD5GR](img/smon-hw-02-03.png)
 
 
 ![Раздел "Monitoring > Latest data" (общий)](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-05.png)
 
-![Раздел "Monitoring > Latest data" (общий)](smon-hw-02-05.png)
+![Раздел "Monitoring > Latest data" (общий)](img/smon-hw-02-05.png)
 
 
 ![Раздел "Monitoring > Latest data" (slov-VirtualBox)](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-06.png)
 
-![Раздел "Monitoring > Latest data" (slov-VirtualBox)](smon-hw-02-06.png)
+![Раздел "Monitoring > Latest data" (slov-VirtualBox)](img/smon-hw-02-06.png)
 
 
 ![Раздел "Monitoring > Latest data" (DESKTOP-PVKD5GR)](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-07.png)
 
-![Раздел "Monitoring > Latest data" (DESKTOP-PVKD5GR)](smon-hw-02-07.png)
+![Раздел "Monitoring > Latest data" (DESKTOP-PVKD5GR)](img/smon-hw-02-07.png)
 
 ---
