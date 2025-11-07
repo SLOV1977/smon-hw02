@@ -1,4 +1,4 @@
-# Домашнее задание к занятию "`Название занятия`" - `Фамилия и имя студента`
+# Домашнее задание к занятию "`Система мониторинга Zabbix`" - `Рахманов Александр`
 
 
 ### Инструкция по выполнению домашнего задания
@@ -22,96 +22,97 @@
 
 ---
 
-### Задание 1
+## Решение.
 
-`Приведите ответ в свободной форме........`
+### Задание 1.
 
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
+### Установите Zabbix Server с веб-интерфейсом.
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+# На slov-VirtualBox (zabbix server):
+
+sudo -i
+apt update
+apt install postgresql
+wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_6.0+ubuntu22.04_all.deb
+dpkg -i zabbix-release_latest_6.0+ubuntu22.04_all.deb
+apt update
+apt install zabbix-server-pgsql zabbix-frontend-php php8.1-pgsql zabbix-apache-conf zabbix-sql-scripts
+su - postgres -c 'psql --command "CREATE USER zabbix WITH PASSWORD '\'123456789\'';"'
+su - postgres -c 'psql --command "CREATE DATABASE zabbix OWNER zabbix;"'
+zcat /usr/share/zabbix-sql-scripts/postgresql/server.sql.gz | sudo -u zabbix psql Zabbix
+sed -i 's/# DBPassword=/DBPassword=13579/g' /etc/zabbix/zabbix_server.conf
+systemctl restart zabbix-server apache2
+systemctl enable zabbix-server apache2
+
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота 1](ссылка на скриншот 1)`
+![Web-интерфейс Zabbix](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-01.png)
 
+![Web-интерфейс Zabbix](smon-hw-02-01.png)
 
 ---
 
-### Задание 2
+### Задание 2.
 
-`Приведите ответ в свободной форме........`
-
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
+### Установите Zabbix Agent на два хоста.
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+# На slov-VirtualBox (zabbix agent):
+
+wget https://repo.zabbix.com/zabbix/6.0/ubuntu/pool/main/z/zabbix-release/zabbix-release_latest_6.0+ubuntu22.04_all.deb
+dpkg -i zabbix-release_latest_6.0+ubuntu22.04_all.deb
+apt update
+apt install zabbix-agent
+systemctl restart zabbix-agent
+systemctl enable zabbix-agent
+sed -i 's/Server=127.0.0.1/Server=10.0.2.15'/g' /etc/zabbix/zabbix_server.conf
+systemctl restart zabbix-agent
+systemctl enable zabbix-agent
+
+# На DESKTOP-PVKD5GR (zabbix agent):
+
+sudo -i
+apt update
+wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_6.0+debian12_all.deb
+dpkg -i zabbix-release_latest_6.0+debian12_all.deb
+apt update
+apt install zabbix-agent
+systemctl restart zabbix-agent
+systemctl enable zabbix-agent
+sed -i 's/Server=127.0.0.1/Server=172.19.96.1'/g' /etc/zabbix/zabbix_server.conf
+systemctl restart zabbix-agent
+systemctl enable zabbix-agent
+
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота 2](ссылка на скриншот 2)`
+![Раздел "Configuration > Hosts"](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-02.png)
 
+![Раздел "Configuration > Hosts"](smon-hw-02-02.png)
+
+
+![Лог zabbix agent на slov-VirtualBox](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-04.png)
+
+![Лог zabbix agent на slov-VirtualBox](smon-hw-02-04.png)
+
+
+![Лог zabbix agent на DESKTOP-PVKD5GR](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-03.png)
+
+![Лог zabbix agent на DESKTOP-PVKD5GR](smon-hw-02-03.png)
+
+
+![Раздел "Monitoring > Latest data" (общий)](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-05.png)
+
+![Раздел "Monitoring > Latest data" (общий)](smon-hw-02-05.png)
+
+
+![Раздел "Monitoring > Latest data" (slov-VirtualBox)](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-06.png)
+
+![Раздел "Monitoring > Latest data" (slov-VirtualBox)](smon-hw-02-06.png)
+
+
+![Раздел "Monitoring > Latest data" (DESKTOP-PVKD5GR)](https://github.com/SLOV1977/smon-hw02/tree/main/img/smon-hw-02-07.png)
+
+![Раздел "Monitoring > Latest data" (DESKTOP-PVKD5GR)](smon-hw-02-07.png)
 
 ---
-
-### Задание 3
-
-`Приведите ответ в свободной форме........`
-
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
-
-```
-Поле для вставки кода...
-....
-....
-....
-....
-```
-
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
-
-### Задание 4
-
-`Приведите ответ в свободной форме........`
-
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
-
-```
-Поле для вставки кода...
-....
-....
-....
-....
-```
-
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота](ссылка на скриншот)`
